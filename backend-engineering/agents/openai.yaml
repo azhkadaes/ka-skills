@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend Engineering"
+  short_description: "Build modular backends from rules and existing contracts"
+  default_prompt: "Use $backend-engineering to plan and build a backend from this project's requirements and existing contracts."
