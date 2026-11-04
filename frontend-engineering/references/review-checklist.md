@@ -70,3 +70,6 @@ Walk this before declaring a feature done. For each unchecked item, either fix i
 - How to run it and how to switch from the dummy to the real API
 - Backend items needed (endpoints, validation parity, auth, rate limits, pagination support)
 - Known follow-ups and risks
+- Bidirectional integration section updated in existing project documents: outgoing assumptions/contracts and incoming backend changes linked without duplicate schemas
+- Returned backend contract checked against the real adapter; affected connected states verified, or remaining mock/unavailable checks explicitly identified
+- Required frontend/backend changes outside scope identified, with working mode and settled decisions preserved across handoffs

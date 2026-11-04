@@ -7,6 +7,12 @@ description: Plan, design, and implement frontend features with production-grade
 
 A planning-first approach to frontend work. The goal is an interface that **loads quickly**, **responds smoothly**, and **avoids unnecessary work**, built on sensible state ownership, efficient requests, and straightforward components. A simple app with the right architecture beats a heavily optimized app with the wrong one, so spend effort on decisions, not on tricks.
 
+## Working agreement
+
+At the beginning of a new assignment, ask one multiple-choice question: **Complete planning and review before editing (Recommended)** or **Edit incrementally as we go**. Reuse an explicit answer already given for this assignment, including one passed from backend-engineering or backend-variants; do not ask again at a skill handoff. Prefer an available clickable multiple-choice input, ask one question at a time, mark the recommendation, and explain the options briefly. If no suitable tool is available, use numbered choices and wait.
+
+In plan-first mode, inspect and analyze without changing project files until the user approves the concrete implementation plan; a requested written plan authorizes that artifact only. In incremental mode, edit within authorized scope as decisions settle. A preselected choice, timeout, or silence is not approval. Continue only independent authorized work while required input is pending.
+
 ## The three questions (apply to every feature, request, calculation, and dependency)
 
 1. **Does this work need to happen at all?** Can the request, calculation, re-render, or dependency be avoided? (Reuse cached data, derive from existing state, use a platform feature, delete the code.)
@@ -57,6 +63,15 @@ Feature: <name>            Traces to: <BRD/PRD ref or user request>
 ### Phase 3: Review against the quality bar
 
 Before declaring done, walk the checklist in `references/review-checklist.md`. Report what was done, what was deliberately not done and why, and what the user must do to go live (real endpoints, env vars, backend validation).
+
+## Bidirectional backend handoff
+
+Use existing project plans and API contracts as the shared source; link definitions instead of duplicating schemas or trackers. The skills remain independently usable. Read `references/architecture-and-data-layer.md` section 10 when preparing or receiving a backend handoff.
+
+- **To backend-engineering:** provide requirement/workflow references, client and wire contracts, auth and error expectations, simulated or client-only rules, list/query semantics, acceptance scenarios, and unresolved gaps. Mark mock behavior as assumptions unless approved requirements establish it.
+- **From backend-engineering:** inspect confirmed contracts, real-adapter setup, session/error/conflict behavior, compatibility changes, verification evidence, and remaining mocks or gaps. Verify these against current code before integrating.
+- Preserve approved business rules and agreed compatibility. Surface disagreements instead of silently reshaping an API or UI to hide them. Integrate through existing adapters where possible, exercise affected UI states against the real backend, and return mismatches and results to the same project documents.
+- Carry the working mode and prior decisions across handoffs. Identify required changes outside the authorized scope without automatically performing them. Neither a backend handoff nor API tests alone establishes connected frontend behavior or production readiness.
 
 ## Non-negotiables on every feature
 

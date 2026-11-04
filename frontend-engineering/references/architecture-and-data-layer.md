@@ -10,6 +10,7 @@
 7. Auth and sensitive data
 8. Translating requirements into frontend design
 9. Adapting to the existing project
+10. Bidirectional backend integration handoff
 
 ---
 
@@ -220,3 +221,19 @@ Keep a short traceability note: requirement -> component/route -> test. When a r
 - The principles here are framework-agnostic: for Vue/Svelte/Angular, map "hooks" to composables/stores/services, "memoization" to computed/derived state, "Suspense/lazy" to the framework's async component and route-level splitting. Keep the same state-ownership and data-layer discipline.
 - For SSR/meta-frameworks (Next.js, Remix, Nuxt, SvelteKit): fetch on the server or in loaders where it removes client waterfalls, keep server and client component boundaries deliberate, and keep secrets server-side.
 - If the existing code violates these practices, do not rewrite everything. Follow local convention for consistency, apply the better practice in new code, and flag the debt.
+
+---
+
+## 10. Bidirectional backend integration handoff
+
+Keep a compact integration section in the existing feature plan, API contract, or requirements matrix. Reuse canonical schemas and decisions through links. No separate duplicate handoff document is required.
+
+**Send to backend work:** requirement IDs or source sentences; user/system workflows; repository interfaces and HTTP adapter serialization; proposed endpoints and schemas; auth/session and field visibility expectations; error normalization; filter/sort/pagination semantics; mutation refresh and optimistic-update behavior; simulated rules and mock limitations; acceptance scenarios and test commands; missing backend capabilities and unresolved assumptions.
+
+Frontend feature boundaries do not prescribe backend modules, and UI entities do not prescribe tables. Client validation and hidden controls are not server enforcement. Aborting a request does not guarantee rollback, and resubmission may repeat a committed action. Make those implications visible rather than requiring the backend to copy mock behavior.
+
+**Receive from backend work:** confirmed contract references and implementation status; agreed changes and migration order; authentication/session configuration; validation, permission, conflict, duplicate-request, and asynchronous-result semantics; base URL and real-adapter configuration; safe local startup/test data; remaining mocked operations; required client changes; connected verification evidence and outstanding scenarios.
+
+When resuming frontend work, check wire behavior through the real HTTP adapter. Update serialization and error normalization at that boundary where compatible; semantic disagreements require an explicit contract decision. Exercise relevant loading, empty, field-error, unauthenticated, forbidden, conflict, retry, and success states, plus cache updates or optimistic rollback. Use deterministic scenarios and report unavailable live checks honestly.
+
+Return verified results and contract mismatches to the same project documents. Keep proposed, implemented, and verified distinct. Backend API tests, mock-backed UI tests, and real connected workflow tests establish different evidence. Carry the chosen working mode across the handoff, and do not expand editing or deployment scope automatically.
