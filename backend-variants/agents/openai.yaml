@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend Variants"
+  short_description: "Compare backend approaches and agree on one design"
+  default_prompt: "Use $backend-variants to compare approaches to this backend decision and guide me through one choice at a time."
