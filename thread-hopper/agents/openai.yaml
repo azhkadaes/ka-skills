@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thread Hopper"
+  short_description: "Compare cached context costs and prepare handoffs"
+  default_prompt: "Use $thread-hopper to assess this chat and offer a handoff when worthwhile."
