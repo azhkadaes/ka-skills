@@ -1,0 +1,7 @@
+interface:
+  display_name: "Context Vault"
+  short_description: "Remember context in a structured Obsidian vault"
+  default_prompt: "Use $context-vault to recall relevant context and maintain my knowledge vault."
+
+policy:
+  allow_implicit_invocation: true
