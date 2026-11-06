@@ -130,6 +130,14 @@ class ReaderTests(unittest.TestCase):
         self.write()
         self.assertIsNone(usage.snapshot(self.path, now=self.now)["cache_hit_fraction"])
 
+    def test_zero_input_is_not_empty_context(self):
+        self.info["last_token_usage"] = {"input_tokens": 0, "cached_input_tokens": 0,
+                                         "total_tokens": 34818}
+        self.write()
+        result = usage.snapshot(self.path, now=self.now)
+        self.assertEqual(result["status"], "unavailable")
+        self.assertNotIn("last_input_window_fraction", result)
+
     def test_missing_and_invalid_usage(self):
         self.path.write_text("{}\n", encoding="utf-8")
         self.assertEqual(usage.snapshot(self.path, now=self.now)["status"], "unavailable")

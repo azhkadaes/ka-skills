@@ -90,6 +90,8 @@ def snapshot(path, pressure=0.8, max_age=300, now=None):
         return result
     try:
         input_tokens = number(last["input_tokens"], "input_tokens", True)
+        if not input_tokens:
+            raise ValueError("Zero input counter cannot establish context occupancy")
         cached = last.get("cached_input_tokens")
         if cached is not None:
             cached = number(cached, "cached_input_tokens", True)
